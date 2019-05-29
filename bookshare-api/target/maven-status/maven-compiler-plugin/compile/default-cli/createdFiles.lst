@@ -1,0 +1,7 @@
+bookshare\api\BookshareApiApplication.class
+bookshare\api\controllers\UserController.class
+bookshare\api\models\UserRegResponse.class
+bookshare\api\repositories\impl\UserRepositoryImpl.class
+bookshare\api\models\UserRegRequest.class
+bookshare\api\entities\User.class
+bookshare\api\repositories\UserRepository.class

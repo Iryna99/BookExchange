@@ -1,0 +1,7 @@
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\BookshareApiApplication.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\repositories\UserRepository.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\entities\User.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\controllers\UserController.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\models\UserRegRequest.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\models\UserRegResponse.java
+A:\project\labs\bookshare\bookshare-api\src\main\java\bookshare\api\repositories\impl\UserRepositoryImpl.java

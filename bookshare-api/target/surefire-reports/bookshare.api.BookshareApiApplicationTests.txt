@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: bookshare.api.BookshareApiApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 72.096 s - in bookshare.api.BookshareApiApplicationTests
