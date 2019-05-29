@@ -1,14 +1,15 @@
 package bookshare.api.controllers;
 
-        import bookshare.api.entities.UserEntity;
-        import bookshare.api.models.UserRegRequest;
-        import bookshare.api.models.UserRegResponse;
-        import bookshare.api.repositories.UserRepository;
-        import bookshare.api.repositories.impl.UserRepositoryImpl;
-        import org.springframework.web.bind.annotation.CrossOrigin;
-        import org.springframework.web.bind.annotation.PostMapping;
-        import org.springframework.web.bind.annotation.RequestBody;
-        import org.springframework.web.bind.annotation.RestController;
+import bookshare.api.entities.UserEntity;
+import bookshare.api.models.UserRegRequest;
+import bookshare.api.models.UserRegResponse;
+import bookshare.api.repositories.UserRepository;
+import bookshare.api.repositories.impl.UserRepositoryImpl;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
@@ -31,8 +32,6 @@ public class UserController {
         newUser.setLastName(regRequest.getLastName());
         newUser.setCity(regRequest.getCity());
         newUser.setPhone(regRequest.getPhone());
-
-
         newUser.setActive(true);
 
         UserEntity insertedUser = this.userRepository.insert(newUser);

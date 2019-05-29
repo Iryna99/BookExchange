@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface UserAnnounceBookRepository {
     List<UserAnnounceBookEntity> selectAll() throws SQLException;
+    public UserAnnounceBookEntity findById(Integer _id) throws SQLException;
 }

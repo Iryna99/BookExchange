@@ -5,12 +5,8 @@ import bookshare.api.entities.BookEntity;
 import bookshare.api.entities.UserAnnounceBookEntity;
 import bookshare.api.entities.UserEntity;
 import bookshare.api.repositories.UserAnnounceBookRepository;
-import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +30,8 @@ public class UserAnnounceBookRepositoryImpl implements UserAnnounceBookRepositor
             "b.year\n" +
             "FROM public.announce_board a JOIN public.\"user\" u ON  a.user_id=u.id JOIN  public.\"book\" b ON a.book_id = b.id";
 
+    private static final String FIND_BY_ID = SELECT_ALL + " WHERE a.id=?";
+
     @Override
     public List<UserAnnounceBookEntity> selectAll() {
         List<UserAnnounceBookEntity> entities = new ArrayList<>();
@@ -49,6 +47,20 @@ public class UserAnnounceBookRepositoryImpl implements UserAnnounceBookRepositor
             e.printStackTrace();
         }
         return entities;
+    }
+
+    @Override
+    public UserAnnounceBookEntity findById(Integer _id) throws SQLException {
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
+            statement.setInt(1, _id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return parseResultSet(resultSet);
+            }
+
+        }
+        return null;
     }
 
     private UserAnnounceBookEntity parseResultSet(ResultSet rs) throws SQLException {
@@ -80,9 +92,9 @@ public class UserAnnounceBookRepositoryImpl implements UserAnnounceBookRepositor
         return entity;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         UserAnnounceBookRepositoryImpl  userAnnounceBookRepository = new UserAnnounceBookRepositoryImpl();
-        userAnnounceBookRepository.selectAll().forEach(System.out::println);
+        System.out.println(userAnnounceBookRepository.findById(2));
     }
 
 

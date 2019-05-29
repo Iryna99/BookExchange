@@ -7,6 +7,15 @@ public class UserAnnounceBookEntity {
     private UserEntity userEntity;
     private BookEntity bookEntity;
     private LocalDateTime announceTimeStamp;
+    private Boolean isActive;
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 
     @Override
     public String toString() {

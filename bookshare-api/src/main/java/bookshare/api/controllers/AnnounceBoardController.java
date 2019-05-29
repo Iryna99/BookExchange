@@ -1,12 +1,11 @@
 package bookshare.api.controllers;
-
 import bookshare.api.entities.*;
 
-import bookshare.api.models.AnnounceAddRequest;
 import bookshare.api.models.AnnounceAddResponse;
 import bookshare.api.models.AnnounceDataResponse;
-
+import bookshare.api.models.AnnounceDetailedDataResponse;
 import bookshare.api.models.BookData;
+
 import bookshare.api.repositories.AnnounceBoardRepository;
 import bookshare.api.repositories.BookRepository;
 import bookshare.api.repositories.UserAnnounceBookRepository;
@@ -16,14 +15,10 @@ import bookshare.api.repositories.impl.BookRepositoryImpl;
 import bookshare.api.repositories.impl.UserAnnounceBookRepositoryImpl;
 
 import bookshare.api.utils.UserTmp;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -66,7 +61,7 @@ public class AnnounceBoardController {
         return new ResponseEntity<>(announceAddResponse, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/api/announce")//display data
+    @GetMapping(value = "api/announce")//display data
     public ResponseEntity<List<AnnounceDataResponse>> getAllUsers() throws SQLException {
         List<UserAnnounceBookEntity> announceBoardEntities = userAnnounceBookRepository.selectAll();
         List<AnnounceDataResponse> announceDataResponses = new ArrayList<>();
@@ -87,4 +82,20 @@ public class AnnounceBoardController {
         return new ResponseEntity<>(announceDataResponses, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/api/announce/{id}")
+    public ResponseEntity<AnnounceDetailedDataResponse> getAnnounce(@PathVariable Integer id) throws SQLException {
+        UserAnnounceBookEntity a = userAnnounceBookRepository.findById(id);
+        UserEntity u = a.getUserEntity();
+        BookEntity b = a.getBookEntity();
+        return new ResponseEntity<>(new AnnounceDetailedDataResponse(
+                a.getId(),
+                u.getFirstName(),
+                u.getLastName(),
+                b.getName(),
+                b.getGenre(),
+                b.getAuthor(),
+                b.getYear(),
+                b.getDescription(),
+                a.getAnnounceTimeStamp()),HttpStatus.OK);
+    }
 }
