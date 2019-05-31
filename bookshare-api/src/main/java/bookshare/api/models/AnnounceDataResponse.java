@@ -40,7 +40,7 @@ public class AnnounceDataResponse {
         this.id = id;
     }
 
-    public String getFirstNname() {
+    public String getFirstName() {
         return firstName;
     }
 
