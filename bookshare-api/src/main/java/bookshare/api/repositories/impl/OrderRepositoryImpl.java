@@ -1,19 +1,20 @@
 package bookshare.api.repositories.impl;
 
-
 import bookshare.api.ConnectionManager;
-import bookshare.api.entities.BookEntity;
 import bookshare.api.entities.OrderEntity;
 import bookshare.api.repositories.OrderRepository;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+
 public class OrderRepositoryImpl implements OrderRepository {
 
     private static final String SELECT_ALL = "SELECT " +
-            "\"client_id\"," +
+            "\"user_id\"," +
             "\"announce_id\"," +
             "\"comment\"," +
             "\"is_active\"" +
@@ -21,9 +22,9 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 
     private static final String CREATE =
-            "INSERT INTO public.order (\"client_id\", \"announce_id\",\"comment\",\"is_active\") VALUES(?,?,?,?)";
+            "INSERT INTO public.order (\"user_id\", \"announce_id\",\"comment\",\"is_active\") VALUES(?,?,?,?) RETURNING \"user_id\"";
 
-    private static final String FIND_BY_CLIENT_ID = SELECT_ALL + " WHERE  o.client_id=? ";
+    private static final String FIND_BY_CLIENT_ID = SELECT_ALL + " WHERE  o.user_id=? ";
 
     private static final String UPDATE_STATUS = "UPDATE public.order  SET \"is_active\" =? WHERE announce_id = ?";
 
@@ -52,7 +53,7 @@ public class OrderRepositoryImpl implements OrderRepository {
             setPreparedStatementData(statement, entity);
             try (ResultSet generatedKeys = statement.executeQuery()) {
                 if (generatedKeys.next()) {
-                    entity.setClientId(generatedKeys.getInt(1));
+                    entity.setUserId(generatedKeys.getInt(1));
 
                 }
             }
@@ -91,18 +92,18 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     }
 
-    @Override
+
     public int update(OrderEntity entity) throws SQLException {
         return 0;
     }
 
-    @Override
+
     public int delete(OrderEntity entity) throws SQLException {
         return 0;
     }
 
     private OrderEntity parseResultSet(ResultSet resultSet) throws SQLException {
-        Integer id = resultSet.getInt("client_id");
+        Integer id = resultSet.getInt("user_id");
         Integer announceId = resultSet.getInt("announce_id");
         String comment = resultSet.getString("comment");
         Boolean isActive = resultSet.getBoolean("is_active");
@@ -110,7 +111,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     }
 
     private void setPreparedStatementData(PreparedStatement statement, OrderEntity entity) throws SQLException {
-        statement.setInt(1,entity.getClientId());
+        statement.setInt(1,entity.getUserId());
         statement.setInt(2, entity.getAnnounceId());
         statement.setString(3, entity.getComment());
         statement.setBoolean(4, entity.getActive());
@@ -120,7 +121,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
         new OrderRepositoryImpl().selectAll().forEach(System.out::println);
 
-        new OrderRepositoryImpl().updateStatus(new OrderEntity(null,2,null,false));
+        new OrderRepositoryImpl().updateStatus(new OrderEntity(1,1,"sdsd",true));
         new OrderRepositoryImpl().selectAll().forEach(System.out::println);
 
     }

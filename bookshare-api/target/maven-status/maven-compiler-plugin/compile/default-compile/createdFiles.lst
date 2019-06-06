@@ -1,5 +1,6 @@
 bookshare\api\models\AnnounceDataResponse.class
 bookshare\api\repositories\OrderRepository.class
+bookshare\api\controllers\OrderController.class
 bookshare\api\repositories\impl\OrderRepositoryImpl.class
 bookshare\api\entities\OrderEntity.class
 bookshare\api\models\AnnounceDetailedDataResponse.class

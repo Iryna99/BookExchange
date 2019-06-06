@@ -1,4 +1,4 @@
-package bookshare.api.repositories;
+/*package bookshare.api.repositories;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,4 +13,4 @@ public interface GeneralRepository<T, I> {
     int update(T entity) throws SQLException;
 
     int delete(T entity) throws SQLException;
-}
+}*/

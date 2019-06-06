@@ -1,7 +1,7 @@
 package bookshare.api.entities;
 
 public class OrderEntity {
-    Integer clientId;
+    Integer userId;
     Integer announceId;
     String comment;
     Boolean isActive;
@@ -9,19 +9,19 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
-    public OrderEntity(Integer clientID, Integer announceId, String comment, Boolean isActive) {
-        this.clientId = clientID;
+    public OrderEntity(Integer userId, Integer announceId, String comment, Boolean isActive) {
+        this.userId = userId;
         this.announceId = announceId;
         this.comment = comment;
         this.isActive = isActive;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setUserId(Integer clientId) {
+        this.userId = clientId;
     }
 
     public Integer getAnnounceId() {
@@ -51,7 +51,7 @@ public class OrderEntity {
     @Override
     public String toString() {
         return "OrderEntity{" +
-                "clientId=" + clientId +
+                "userId=" + userId +
                 ", announceId=" + announceId +
                 ", comment='" + comment + '\'' +
                 ", isActive=" + isActive +
